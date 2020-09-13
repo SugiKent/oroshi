@@ -1,5 +1,5 @@
 es-data
 logstash/logs
-mysql/init_data
+mysql/init_data/*.sql
 .DS_Store
 .envrc
