@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  mysql:
+    build: ./mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+      TZ: 'Asia/Tokyo'
+    ports:
+      - "3314:3306"
+    volumes:
+      - ./mysql/init_data:/docker-entrypoint-initdb.d
+      - ./mysql/config/my.conf:/etc/mysql/conf.d/my.cnf
+  logstash:
+    build: ./logstash
+    container_name: logstash
+    environment:
+      DATABASE: ${DATABASE}
+    volumes:
+      - ./logstash/logs:/usr/share/logstash/logs
+    ports:
+      - 5044:5044
+      - 9600:9600

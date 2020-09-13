@@ -1,0 +1,5 @@
+es-data
+logstash/logs
+mysql/init_data
+.DS_Store
+.envrc
